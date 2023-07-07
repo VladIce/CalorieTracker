@@ -6,7 +6,9 @@ public class Main {
 
     public static void main(String[] args) {
 
+        StepTracker stepTracker = new StepTracker();
         Scanner scanner = new Scanner(System.in);
+
 
         printMenu();
         int userInput = scanner.nextInt();
@@ -18,10 +20,33 @@ public class Main {
                 userInput = scanner.nextInt();
 
             }
+
+
             if (userInput == 1) {
-                System.out.println("Вы выбрали 1");
-                return;
+                System.out.println("Укажите месяц с заглавной буквы: ");
+                String month = scanner.next();
+                while (!stepTracker.monthData.containsKey(month)) {
+                    System.out.println("Вы ввели некорретный месяц! Пожалуйста, повторите ввод.");
+                    System.out.println("Укажите месяц с заглавной буквы: ");
+                    month = scanner.next();
+                }
+
+                System.out.println("Укажите номер дня: ");
+                int numberOfDay = scanner.nextInt();
+                while (numberOfDay < 1 || numberOfDay > 30) {
+                    System.out.println("Вы ввели некорретное число! Пожалуйста, повторите ввод.");
+                    System.out.println("Укажите месяц с заглавной буквы: ");
+                    numberOfDay = scanner.nextInt();
+                }
+
+                System.out.println("Укажите количество шагов: ");
+                int numberSteps = scanner.nextInt();
+                stepTracker.saveSteps(month, numberOfDay, numberSteps);
+
+
             }
+
+
             printMenu();
             userInput = scanner.nextInt();
 

@@ -1,9 +1,8 @@
 package org.example;
 
 
-import java.util.ArrayList;
+
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 
@@ -24,6 +23,10 @@ public class StepTracker {
     }
 
     public void saveSteps(String month, int dayNumber, int numberSteps) {
+        if (numberSteps < 0) {
+            System.out.println("Количество шагов не может быть отрицательным.");
+            return;
+        }
         monthData.get(month).dayOfMonths.put(dayNumber, numberSteps);
         System.out.println("Данные успешно сохранены");
     }
