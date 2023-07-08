@@ -1,5 +1,6 @@
 package org.example;
 
+import java.sql.SQLOutput;
 import java.util.Scanner;
 
 public class Main {
@@ -8,7 +9,7 @@ public class Main {
 
         StepTracker stepTracker = new StepTracker();
         Scanner scanner = new Scanner(System.in);
-        
+
         printMenu();
         int userInput = scanner.nextInt();
 
@@ -48,38 +49,25 @@ public class Main {
                 System.out.println("");
             }
 
-
-            printMenu();
-            userInput = scanner.nextInt();
-
             if (userInput == 2) {
                 System.out.println("Введите месяц по которому ходите получить статистику: ");
                 String month = scanner.next();
-                stepTracker.gettingStatisticsTheMonth(month);
-                System.out.println("Вы выбрали 2");
+                stepTracker.printStatistic(month);
 
             }
-            printMenu();
-            userInput = scanner.nextInt();
 
             if (userInput == 3) {
-                System.out.println("Вы выбрали 3");
+                System.out.println("Изменить цель по количеству шагов в день. ");
                 return;
             }
             printMenu();
             userInput = scanner.nextInt();
 
-            if (userInput == 4) {
-                System.out.println("Вы выбрали 5");
-                return;
-            }
         }
-
-
     }
 
     private static void printMenu() {
-
+        System.out.println("Выберите один из пунктов: ");
         System.out.println("1 - Ввести количество шагов за определённый день.");
         System.out.println("2 - Напечатать статистику за определённый месяц.");
         System.out.println("3 - Изменить цель по количеству шагов в день.");

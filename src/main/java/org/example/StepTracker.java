@@ -1,7 +1,6 @@
 package org.example;
 
 
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -27,17 +26,46 @@ public class StepTracker {
         System.out.println("Данные успешно сохранены!");
     }
 
-    public void gettingStatisticsTheMonth(String month) {
-        System.out.println("Количество пройденных шагов по дням: ");
-
-
-
-
-
+    public void printStatistic(String month) {
+        quantityStepsPerMonth(month);
+        totalStepsPerMonth(month);
+        maximumQuantityStepsCompletedInMonth(month);
     }
 
 
+    private void quantityStepsPerMonth(String month) {
+        System.out.println("Количество пройденных шагов по дням: ");
+        for (Integer day : monthData.get(month).dayOfMonths.keySet()) {
+            System.out.print(day + " день: " + monthData.get(month).dayOfMonths.get(day) + " шагов, ");
+        }
+        System.out.println();
+    }
 
+    private void totalStepsPerMonth(String month) {
+        int totalSteps = 0;
+
+        for (Integer day : monthData.get(month).dayOfMonths.keySet()) {
+            totalSteps += monthData.get(month).dayOfMonths.get(day);
+        }
+
+        System.out.println("За месяц " + month + " Вы прошли " + totalSteps + " шагов.");
+        if (totalSteps > 100000) {
+            System.out.println("Молодец, так держать!");
+        }
+    }
+
+    private void maximumQuantityStepsCompletedInMonth(String month) {
+
+        int maxSteps = 0;
+        for (Integer day : monthData.get(month).dayOfMonths.keySet()) {
+            if (maxSteps < monthData.get(month).dayOfMonths.get(day)) {
+                maxSteps = monthData.get(month).dayOfMonths.get(day);
+            }
+        }
+
+        System.out.println("Максимальное пройденное количество шагов за месяц: " + maxSteps);
+
+    }
 
 
     public void setNumberOfSteps(int numberOfSteps) {
@@ -52,7 +80,7 @@ public class StepTracker {
         return dayOfMonth;
     }
 
-     class MonthData {
+    class MonthData {
         Map<Integer, Integer> dayOfMonths = new HashMap<>();
 
         public MonthData() {
