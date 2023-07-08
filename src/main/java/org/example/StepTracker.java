@@ -10,9 +10,7 @@ public class StepTracker {
 
     private int numberOfSteps = 10000;
     HashMap<String, MonthData> monthData = new HashMap<>();
-    String[] months = {"Январь", "Февраль", "Март", "Апрель",
-            "Май", "Июнь", "Июль", "Август", "Сентябрь",
-            "Октябрь", "Ноябрь", "Декабрь"};
+    String[] months = {"Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"};
 
     protected int dayOfMonth = 30;
 
@@ -46,17 +44,14 @@ public class StepTracker {
 
     private void totalStepsPerMonth(String month) {
         int totalSteps = totalSteps(month);
-
         System.out.println("За месяц " + month + " Вы прошли " + totalSteps + " шагов.");
         if (totalSteps > 100000) {
             System.out.println("Молодец, так держать!");
         }
-
     }
 
     private int totalSteps(String month) {
         int totalSteps = 0;
-
         for (Integer day : monthData.get(month).dayOfMonths.keySet()) {
             totalSteps += monthData.get(month).dayOfMonths.get(day);
         }
@@ -64,37 +59,29 @@ public class StepTracker {
     }
 
     private void maximumQuantityStepsCompletedInMonth(String month) {
-
         int maxSteps = 0;
         for (Integer day : monthData.get(month).dayOfMonths.keySet()) {
             if (maxSteps < monthData.get(month).dayOfMonths.get(day)) {
                 maxSteps = monthData.get(month).dayOfMonths.get(day);
             }
         }
-
         System.out.println("Максимальное пройденное количество шагов за месяц: " + maxSteps);
     }
 
     private void averageQuantitySteps(String month) {
         int totalSteps = 0;
-
         for (Integer day : monthData.get(month).dayOfMonths.keySet()) {
             totalSteps += monthData.get(month).dayOfMonths.get(day);
         }
-
         System.out.println("Среднее количество шагов: " + totalSteps / dayOfMonth);
     }
 
-    public void setNumberOfSteps(int numberOfSteps) {
-        if (numberOfSteps < 0) {
-            System.out.println("Количество шагов не может быть отрицательным.");
-            return;
-        }
-        this.numberOfSteps = numberOfSteps;
+    public int getNumberOfSteps() {
+        return numberOfSteps;
     }
 
-    public int getDayOfMonth() {
-        return dayOfMonth;
+    public void setNumberOfSteps(int numberOfSteps) {
+        this.numberOfSteps = numberOfSteps;
     }
 
     class MonthData {
@@ -103,7 +90,6 @@ public class StepTracker {
         public MonthData() {
             for (int i = 0; i <= 30; i++) {
                 dayOfMonths.put(i, 0);
-
             }
         }
     }
