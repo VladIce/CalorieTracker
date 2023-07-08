@@ -30,8 +30,8 @@ public class StepTracker {
         quantityStepsPerMonth(month);
         totalStepsPerMonth(month);
         maximumQuantityStepsCompletedInMonth(month);
+        averageQuantitySteps(month);
     }
-
 
     private void quantityStepsPerMonth(String month) {
         System.out.println("Количество пройденных шагов по дням: ");
@@ -41,7 +41,7 @@ public class StepTracker {
         System.out.println();
     }
 
-    private void totalStepsPerMonth(String month) {
+    private int totalStepsPerMonth(String month) {
         int totalSteps = 0;
 
         for (Integer day : monthData.get(month).dayOfMonths.keySet()) {
@@ -52,6 +52,7 @@ public class StepTracker {
         if (totalSteps > 100000) {
             System.out.println("Молодец, так держать!");
         }
+        return totalSteps;
     }
 
     private void maximumQuantityStepsCompletedInMonth(String month) {
@@ -64,7 +65,11 @@ public class StepTracker {
         }
 
         System.out.println("Максимальное пройденное количество шагов за месяц: " + maxSteps);
+    }
 
+    private void averageQuantitySteps(String month) {
+        int averageQuantitySteps = totalStepsPerMonth(month) / dayOfMonth;
+        System.out.println("Среднее количество шагов: " + averageQuantitySteps);
     }
 
 
