@@ -6,6 +6,7 @@ import java.util.Map;
 
 
 public class StepTracker {
+    Converter converter = new Converter();
 
     private int numberOfSteps = 10000;
     HashMap<String, MonthData> monthData = new HashMap<>();
@@ -31,6 +32,8 @@ public class StepTracker {
         totalStepsPerMonth(month);
         maximumQuantityStepsCompletedInMonth(month);
         averageQuantitySteps(month);
+        converter.distanceСovered(totalSteps(month));
+        converter.numberOfCalories(totalSteps(month));
     }
 
     private void quantityStepsPerMonth(String month) {
@@ -41,16 +44,21 @@ public class StepTracker {
         System.out.println();
     }
 
-    private int totalStepsPerMonth(String month) {
-        int totalSteps = 0;
-
-        for (Integer day : monthData.get(month).dayOfMonths.keySet()) {
-            totalSteps += monthData.get(month).dayOfMonths.get(day);
-        }
+    private void totalStepsPerMonth(String month) {
+        int totalSteps = totalSteps(month);
 
         System.out.println("За месяц " + month + " Вы прошли " + totalSteps + " шагов.");
         if (totalSteps > 100000) {
             System.out.println("Молодец, так держать!");
+        }
+
+    }
+
+    private int totalSteps(String month) {
+        int totalSteps = 0;
+
+        for (Integer day : monthData.get(month).dayOfMonths.keySet()) {
+            totalSteps += monthData.get(month).dayOfMonths.get(day);
         }
         return totalSteps;
     }
@@ -68,10 +76,14 @@ public class StepTracker {
     }
 
     private void averageQuantitySteps(String month) {
-        int averageQuantitySteps = totalStepsPerMonth(month) / dayOfMonth;
-        System.out.println("Среднее количество шагов: " + averageQuantitySteps);
-    }
+        int totalSteps = 0;
 
+        for (Integer day : monthData.get(month).dayOfMonths.keySet()) {
+            totalSteps += monthData.get(month).dayOfMonths.get(day);
+        }
+
+        System.out.println("Среднее количество шагов: " + totalSteps / dayOfMonth);
+    }
 
     public void setNumberOfSteps(int numberOfSteps) {
         if (numberOfSteps < 0) {
@@ -94,7 +106,5 @@ public class StepTracker {
 
             }
         }
-
-
     }
 }
