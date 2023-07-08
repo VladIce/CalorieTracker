@@ -23,12 +23,17 @@ public class StepTracker {
     }
 
     public void saveSteps(String month, int dayNumber, int numberSteps) {
-        if (numberSteps < 0) {
-            System.out.println("Количество шагов не может быть отрицательным.");
-            return;
-        }
         monthData.get(month).dayOfMonths.put(dayNumber, numberSteps);
-        System.out.println("Данные успешно сохранены");
+        System.out.println("Данные успешно сохранены!");
+    }
+
+    public void gettingStatisticsTheMonth(String month) {
+        System.out.println("Количество пройденных шагов по дням: ");
+
+
+
+
+
     }
 
 
